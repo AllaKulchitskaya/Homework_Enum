@@ -1,8 +1,10 @@
 package transport;
 
 public class Car extends Transport implements Competitive {
-    public Car(String brand, String model, double engineVolume) {
+    private final BodyworkTypes bodyworkType;
+    public Car(String brand, String model, double engineVolume, BodyworkTypes bodyworkType) {
         super(brand, model, engineVolume);
+        this.bodyworkType = bodyworkType;
     }
 
     public enum BodyworkTypes {
@@ -31,10 +33,14 @@ public class Car extends Transport implements Competitive {
 
         @Override
         public String toString() {
-            return "Тип кузова: " + name;
+            return "тип кузова: " + name;
         }
     }
 
+
+    public BodyworkTypes getBodyworkType() {
+        return bodyworkType;
+    }
 
     @Override
     public void startMoving() {
@@ -50,7 +56,16 @@ public class Car extends Transport implements Competitive {
 
     @Override
     public String toString() {
-        return "Автомобиль " + super.toString();
+        return "Автомобиль " + super.toString() + ", " + bodyworkType.toString();
+    }
+
+    @Override
+    public void printType() {
+        if (bodyworkType == null) {
+            System.out.println("Данных по транспортному средству недостаточно");
+        } else {
+            System.out.println(bodyworkType);
+        }
     }
 
 

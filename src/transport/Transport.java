@@ -40,4 +40,6 @@ public abstract class Transport {
     public String toString() {
         return brand + ", модель " + model + ", объем двигателя - " + engineVolume + " л";
     }
+
+    public abstract void printType();
 }

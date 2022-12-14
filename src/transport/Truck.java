@@ -1,8 +1,10 @@
 package transport;
 
 public class Truck extends Transport implements Competitive {
-    public Truck(String brand, String model, double engineVolume) {
+    private final CargoCapacity cargoCapacity;
+    public Truck(String brand, String model, double engineVolume, CargoCapacity cargoCapacity) {
         super(brand, model, engineVolume);
+        this.cargoCapacity = cargoCapacity;
     }
 
     public enum CargoCapacity {
@@ -28,10 +30,14 @@ public class Truck extends Transport implements Competitive {
         @Override
         public String toString() {
             if (maxLimit == null) {
-                return "Грузоподъемность: от " + minLimit + " тонн";
+                return "грузоподъемность: от " + minLimit + " тонн";
             }
-            return "Грузоподъемность: от " + minLimit + " тонн до " + maxLimit + " тонн";
+            return "грузоподъемность: от " + minLimit + " тонн до " + maxLimit + " тонн";
         }
+    }
+
+    public CargoCapacity getCargoCapacity() {
+        return cargoCapacity;
     }
 
     @Override
@@ -46,7 +52,16 @@ public class Truck extends Transport implements Competitive {
 
     @Override
     public String toString() {
-        return "Грузовик " + super.toString();
+        return "Грузовик " + super.toString() + ", " + cargoCapacity.toString();
+    }
+
+    @Override
+    public void printType() {
+        if (cargoCapacity == null) {
+            System.out.println("Данных по транспортному средству недостаточно");
+        } else {
+            System.out.println(cargoCapacity);
+        }
     }
 
     @Override

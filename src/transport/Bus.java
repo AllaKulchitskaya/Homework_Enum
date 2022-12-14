@@ -1,8 +1,11 @@
 package transport;
 
 public class Bus extends Transport implements Competitive {
-    public Bus(String brand, String model, double engineVolume) {
+
+    private final Busload busload;
+    public Bus(String brand, String model, double engineVolume, Busload busload) {
         super(brand, model, engineVolume);
+        this.busload = busload;
     }
 
     public enum Busload {
@@ -30,8 +33,12 @@ public class Bus extends Transport implements Competitive {
 
         @Override
         public String toString() {
-            return "Вместимость: " + minNumber + "-" + maxNumber + " мест";
+            return "вместимость: " + minNumber + "-" + maxNumber + " мест";
         }
+    }
+
+    public Busload getBusload() {
+        return busload;
     }
 
     @Override
@@ -46,7 +53,16 @@ public class Bus extends Transport implements Competitive {
 
     @Override
     public String toString() {
-        return "Автобус " + super.toString();
+        return "Автобус " + super.toString() + ", " + busload.toString();
+    }
+
+    @Override
+    public void printType() {
+        if (busload == null) {
+            System.out.println("Данных по транспортному средству недостаточно");
+        } else {
+            System.out.println(busload);
+        }
     }
 
     @Override
